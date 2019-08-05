@@ -10,8 +10,8 @@ let mainWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800, 
-    height: 600, 
+    width: 800,
+    height: 600,
     webPreferences: {
       nodeIntegration: true
     }
@@ -23,9 +23,9 @@ const createWindow = () => {
     slashes: true
   }));
 
-  if (isDevelopment) {
-      mainWindow.webContents.openDevTools();
-  }
+  // if (isDevelopment) {
+  //   mainWindow.webContents.openDevTools();
+  // }
 
 
   mainWindow.on('closed', () => {
@@ -46,4 +46,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
