@@ -12,8 +12,13 @@ gulp.task('build-css', function(){
     .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('build-data', function(){
+  return gulp.src('data/*.json')
+    .pipe(gulp.dest('dist/data'));
+});
+
 gulp.task('build-js', () => {
-  return gulp.src(['main.js', 'src/**/*.js', '!src/**/*.test.js'])
+  return gulp.src(['main.js', 'store.js', 'src/**/*.js', '!src/**/*.test.js'])
     .pipe(maps.init())
     .pipe(babel())
     .pipe(maps.write('.'))
@@ -21,7 +26,7 @@ gulp.task('build-js', () => {
 });
 
 
-gulp.task('build', gulp.series('build-css', 'build-js'));
+gulp.task('build', gulp.series('build-css', 'build-data', 'build-js'));
 
 
 /* Copy */

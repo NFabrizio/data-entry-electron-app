@@ -1,0 +1,6 @@
+[
+  { "name": "Mehmet", "surname": "Baran", "birthYear": 1987, "birthCity": 63 },
+  { "name": "Jones", "surname": "Brian", "birthYear": 1972, "birthCity": 12 },
+  { "name": "Smith", "surname": "John", "birthYear": 1991, "birthCity": 18 },
+  { "name": "Rickman", "surname": "Alan", "birthYear": 1963, "birthCity": 21 }
+]
