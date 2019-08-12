@@ -2,16 +2,23 @@ import electron from 'electron';
 import path from 'path';
 import url from 'url';
 import isDevelopment from 'electron-is-dev';
+import Store from './store';
+import defaultData from './data/defaultData';
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow;
 
+const store = new Store({
+  configName: 'user-data',
+  defaults: defaultData
+});
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 940,
+    height: 800,
     webPreferences: {
       nodeIntegration: true
     }
