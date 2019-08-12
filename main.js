@@ -10,11 +10,6 @@ const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow;
 
-const dataStore = new Store({
-  configName: 'user-data',
-  defaults: defaultData
-});
-
 const prefStore = new Store({
   configName: 'user-preferences',
   defaults: {
