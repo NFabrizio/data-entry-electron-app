@@ -1,6 +1,6 @@
-import electron from 'electron';
-import path from 'path';
-import fs from 'fs';
+const electron = require('electron');
+const path = require('path');
+const fs = require('fs');
 
 class Store {
   constructor(opts) {
@@ -17,7 +17,7 @@ class Store {
   get(key) {
     return this.data[key];
   }
-  
+
   // ...and this will set it
   set(key, val) {
     this.data[key] = val;
