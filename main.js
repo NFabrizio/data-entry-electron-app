@@ -10,15 +10,27 @@ const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow;
 
-const store = new Store({
+const dataStore = new Store({
   configName: 'user-data',
   defaults: defaultData
 });
 
+const prefStore = new Store({
+  configName: 'user-preferences',
+  defaults: {
+    windowBounds: {
+      height: 800,
+      width: 940
+    }
+  }
+});
+
 const createWindow = () => {
+  const { height, width } = prefStore.get('windowBounds');
+
   mainWindow = new BrowserWindow({
-    width: 940,
-    height: 800,
+    width,
+    height,
     webPreferences: {
       nodeIntegration: true
     }
@@ -34,6 +46,14 @@ const createWindow = () => {
   //   mainWindow.webContents.openDevTools();
   // }
 
+  mainWindow.on('resize', () => {
+    // This event doesn't pass the window size, so call getBounds which returns
+    // an object with  height, width, and x and y coordinates.
+    const { height, width } = mainWindow.getBounds();
+
+    // Store window size for use upon app restart
+    prefStore.set('windowBounds', { height, width });
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
