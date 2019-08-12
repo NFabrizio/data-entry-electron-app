@@ -16,6 +16,14 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import defaultData from '../data/defaultData';
+import Store from '../store';
+
+const dataStore = new Store({
+  configName: 'user-data',
+  defaults: {
+    entryData: defaultData
+  }
+});
 
 const tableColumns = [
   { title: "First Name", field: "name" },
@@ -51,7 +59,7 @@ const DataTable = () => (
   <div style={{ maxWidth: "100%" }}>
     <MaterialTable
       columns={tableColumns}
-      data={defaultData}
+      data={dataStore.get('entryData')}
       icons={tableIcons}
       title="Demo Title"
     />
