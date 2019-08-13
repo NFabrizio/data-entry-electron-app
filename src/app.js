@@ -3,10 +3,8 @@ import DataTable from './DataTable';
 
 const App = () => (
   <div className="hello">
-    <h2>Hello Basic Electron App</h2>
-    <img src="assets/Logo.png" />
-    <h4>A basic Electron + React.js template</h4>
-    <h4>Have Fun!</h4>
+    <h2>Basic Data Entry Electron App</h2>
+    <img src="assets/Logo.png" style={{width: 100, marginBottom: 20}} />
 
     <DataTable />
   </div>
