@@ -61,7 +61,7 @@ const DataTable = () => (
       columns={tableColumns}
       data={dataStore.get('entryData')}
       icons={tableIcons}
-      title="Demo Title"
+      title="Data Table"
     />
   </div>
 );
