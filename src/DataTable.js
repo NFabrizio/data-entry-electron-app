@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { Component, forwardRef } from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Check from '@material-ui/icons/Check';
@@ -19,12 +19,11 @@ import defaultData from '../data/defaultData';
 import Store from '../store';
 
 const dataStore = new Store({
-  configName: 'user-data',
+  configName: 'table-data',
   defaults: {
     entryData: defaultData
   }
 });
-
 const tableColumns = [
   { title: "First Name", field: "name" },
   { title: "Last Name", field: "surname" },
@@ -55,15 +54,69 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-const DataTable = () => (
-  <div style={{ maxWidth: "100%" }}>
-    <MaterialTable
-      columns={tableColumns}
-      data={dataStore.get('entryData')}
-      icons={tableIcons}
-      title="Data Table"
-    />
-  </div>
-);
+class DataTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      entryData: dataStore.get('entryData')
+    };
+  }
+
+  editable = {
+    onRowAdd: newData => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const data = this.state.entryData;
+          data.push(newData);
+          this.setState({ entryData: data });
+          dataStore.set('entryData', data);
+
+          resolve();
+        }, 1000);
+      });
+    },
+    onRowDelete: oldData => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          let data = this.state.entryData;
+          const index = data.indexOf(oldData);
+          data.splice(index, 1);
+          this.setState({ entryData: data });
+          dataStore.set('entryData', data);
+
+          resolve();
+        }, 1000);
+      });
+    },
+    onRowUpdate: (newData, oldData) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const data = this.state.entryData;
+          const index = data.indexOf(oldData);
+          data[index] = newData;
+          this.setState({ entryData: data });
+          dataStore.set('entryData', data);
+
+          resolve();
+        }, 1000);
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div style={{ maxWidth: "100%" }}>
+        <MaterialTable
+          columns={tableColumns}
+          data={this.state.entryData}
+          editable={this.editable}
+          icons={tableIcons}
+          title="Data Table"
+        />
+      </div>
+    );
+  }
+}
 
 export default DataTable;
