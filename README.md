@@ -2,7 +2,7 @@
 
 This is a basic Electron app that renders a data table with some sample data.  
 The data table is editable, and changes to the data (editing existing data,  
-adding rows and deleting rows) is saved to a local file for use when restarting  
+adding rows and deleting rows) are saved to a local file for use when restarting  
 the application.  
 
 ## Installation and Set Up  
