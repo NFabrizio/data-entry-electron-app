@@ -2,12 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./index.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'nonce-<%= scriptNonce %>'; style-src 'nonce-<%= styleNonce %>';">
+    <meta property="csp-nonce" content=<%= styleNonce %> />
+    <link rel="stylesheet" type="text/css" href="./index.css" nonce=<%= styleNonce %>>
     <title>Basic Electron App</title>
   </head>
   <body>
     <div id="app"></div>
-    <script type="application/javascript">
+    <script type="application/javascript" nonce=<%= scriptNonce %>>
       require('./index.js');
     </script>
   </body>

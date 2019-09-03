@@ -24,22 +24,25 @@ const createWindow = () => {
   const { height, width } = prefStore.get('windowBounds');
 
   mainWindow = new BrowserWindow({
-    width,
     height,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+      webSecurity: true
+    },
+    width
   });
 
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+  if (isDevelopment) {
+    mainWindow.webContents.openDevTools();
+  }
 
-  // if (isDevelopment) {
-  //   mainWindow.webContents.openDevTools();
-  // }
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      slashes: true
+    })
+  );
 
   mainWindow.on('resize', () => {
     // This event doesn't pass the window size, so call getBounds which returns

@@ -1,9 +1,11 @@
 const spawn = require('child_process').spawn;
 const gulp  = require('gulp');
+const template = require('gulp-template');
 const maps  = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const css   = require('gulp-css');
 const path   = require('path');
+const uuidv4 = require('uuid/v4');
 
 /* Build */
 gulp.task('build-css', function(){
@@ -31,7 +33,14 @@ gulp.task('build', gulp.series('build-css', 'build-data', 'build-js'));
 
 /* Copy */
 gulp.task('copy-html', () => {
-  return gulp.src('src/*.html').pipe(gulp.dest('dist/'));
+  // Create nonces during the build and pass them to the template for use with inline scripts and styles
+  const nonceData = {
+    scriptNonce: new Buffer(uuidv4()).toString('base64'),
+    styleNonce: new Buffer(uuidv4()).toString('base64')
+  };
+  return gulp.src('src/*.html')
+  .pipe(template(nonceData))
+  .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('copy-assets', () => {
