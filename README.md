@@ -1,9 +1,13 @@
 # data-entry-electron-app
 
 This is a basic Electron app that renders a data table with some sample data.  
+
 The data table is editable, and changes to the data (editing existing data,  
 adding rows and deleting rows) are saved to a local file for use when restarting  
 the application.  
+
+This application also includes a simple example of how to implement a content  
+security policy in an Electron app using gulp templating.
 
 ## Installation and Set Up  
 Below are the instructions for installing this application.  
